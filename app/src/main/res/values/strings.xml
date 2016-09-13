@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">"WeatherParser "</string>
+    <string name="update">Обновить</string>
+    <string name="load">Идет загрузка</string>
+    <string name="no_data">Нет данных</string>
+    <string name="load_error">Во время загрузки произошла ошибка</string>
+
+
+    <string name="base_api_url">http://pogoda.ngs.ru/</string>
+    <string name="day_of_week">День недели</string>
+    <string name="date">Дата</string>
+    <string name="time">День</string>
+    <string name="default_temp">+ 25</string>
+    <string name="default_wind">5-7м/с Ю-З</string>
+    <string name="default_press">746 мм</string>
+</resources>
