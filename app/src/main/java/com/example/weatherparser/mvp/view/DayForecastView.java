@@ -16,6 +16,8 @@ import java.util.List;
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface DayForecastView  extends MvpView {
 
+    void setCityName(String name);
+
     void setDate(String dayOfWeek, String date);
 
     void setForecasts(List<Hour> hours);

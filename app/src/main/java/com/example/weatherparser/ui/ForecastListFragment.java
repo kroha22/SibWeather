@@ -25,7 +25,9 @@ import butterknife.ButterKnife;
 
 public class ForecastListFragment extends MvpSupportFragment implements ForecastListView {
 
+    private static final String CITY_NUMBER = "CITY_NUMBER";
     private static final String DAY_FORECAST = "DAY_FORECAST";
+    private static final String FORECAST_PRESENTER = "FORECAST_PRESENTER";
 
     @BindView(R.id.fragment_weather_list_recyclerview)
     RecyclerView mWeatherRecyclerView;
@@ -36,12 +38,16 @@ public class ForecastListFragment extends MvpSupportFragment implements Forecast
     @BindView(R.id.fragment_weather_list_text_view_empty)
     TextView mEmptyView;
 
+    @BindView(R.id.fragment_weather_list_text_view_city)
+    TextView mCityView;
+
     @BindView(R.id.fragment_weather_list_text_view_error)
     TextView mErrorView;
 
     private CollectionRecycleAdapter<Forecast> mAdapter;
+    private int mCityNumber;
 
-    @InjectPresenter
+    @InjectPresenter (tag = FORECAST_PRESENTER)
     ForecastListPresenter mPresenter;
 
     @Override
@@ -72,12 +78,19 @@ public class ForecastListFragment extends MvpSupportFragment implements Forecast
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(getActivity(), DayForecastActivity.class);
                         intent.putExtra(DAY_FORECAST, mAdapter.getItem(position));
+                        intent.putExtra(CITY_NUMBER, mCityNumber);
                         startActivity(intent);
                     }
                 })
         );
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.userSelectCity();
     }
 
     @Override
@@ -92,11 +105,13 @@ public class ForecastListFragment extends MvpSupportFragment implements Forecast
 
     @Override
     public void showForecast() {
+        mCityView.setVisibility(View.VISIBLE);
         mWeatherRecyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideForecast() {
+        mCityView.setVisibility(View.GONE);
         mWeatherRecyclerView.setVisibility(View.GONE);
     }
 
@@ -125,8 +140,14 @@ public class ForecastListFragment extends MvpSupportFragment implements Forecast
         mErrorView.setVisibility(View.GONE);
     }
 
-    public void updateForecasts() {
-        mPresenter.userClickUpdate(getActivity());
+    @Override
+    public void setCityName(int number, String name) {
+        mCityNumber = number;
+        mCityView.setText(name);
+    }
+
+    public void updateForecasts(int number) {
+        mPresenter.userClickUpdate(number, getActivity());
     }
 
 }

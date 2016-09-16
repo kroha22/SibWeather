@@ -41,5 +41,6 @@ public interface ForecastListView extends MvpView {
 
     void hideError();
 
+    void setCityName(int number, String name);
 }
 

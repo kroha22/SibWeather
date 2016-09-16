@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 
 public class DayForecastActivity extends MvpAppCompatActivity implements DayForecastView {
 
+    private static final String CITY_NUMBER = "CITY_NUMBER";
     private static final String DAY_FORECAST = "DAY_FORECAST";
 
     @BindView(R.id.activity_day_forecast_text_view_day)
@@ -31,11 +32,15 @@ public class DayForecastActivity extends MvpAppCompatActivity implements DayFore
     @BindView(R.id.activity_day_forecast_text_view_date)
     TextView mDateTextView;
 
+    @BindView(R.id.activity_day_forecast_text_view_city)
+    TextView mCityView;
+
     @BindView(R.id.activity_day_forecast_list_view_forecast)
     ListView mForecastList;
 
     private Forecast mDayForecast;
     private SimpleAdapter<Hour> mAdapter;
+    private int mCityNumber;
 
     @InjectPresenter
     DayForecastPresenter mPresenter;
@@ -50,6 +55,7 @@ public class DayForecastActivity extends MvpAppCompatActivity implements DayFore
         Intent intent = getIntent();
         if (intent != null) {
             mDayForecast = (Forecast) intent.getSerializableExtra(DAY_FORECAST);
+            mCityNumber = intent.getIntExtra(CITY_NUMBER, 0);
         }
 
         mAdapter = new SimpleAdapter<Hour>(this) {
@@ -61,7 +67,12 @@ public class DayForecastActivity extends MvpAppCompatActivity implements DayFore
 
         mForecastList.setAdapter(mAdapter);
 
-        mPresenter.userSelectDay(mDayForecast);
+        mPresenter.userSelectDay(mCityNumber, mDayForecast);
+    }
+
+    @Override
+    public void setCityName(String name) {
+        mCityView.setText(name);
     }
 
     @Override

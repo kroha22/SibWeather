@@ -1,11 +1,11 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.Design.Light">
+    <style name="AppTheme.MyTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primary_material_light</item>
-        <item name="colorPrimaryDark">@color/primary_dark_material_light</item>
-        <item name="colorAccent">@android:color/holo_green_light</item>
+        <item name="colorPrimary">#fff5f5f5</item>
+        <item name="colorPrimaryDark">#ff757575</item>
+        <item name="colorAccent">#ff99cc00</item>
     </style>
 
 </resources>
