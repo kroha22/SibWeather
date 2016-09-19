@@ -75,7 +75,7 @@ public class WeatherViewHolder extends CollectionRecycleAdapter.RecycleViewHolde
         }
 
         //set values
-        Hour day = model.getHours().get(1);
+        Hour day = model.getHours().get(2);
         String temperature;
         int t = day.getTemperature().getAvg();
         if (t > 0) {

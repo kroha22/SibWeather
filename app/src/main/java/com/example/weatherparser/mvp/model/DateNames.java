@@ -24,7 +24,7 @@ public enum DateNames {
     }
 
     public static List<DateNames> getTime() {
-        return new ArrayList<>(Arrays.asList(MORNING, DAY, EVENING, NIGHT));
+        return new ArrayList<>(Arrays.asList(NIGHT, MORNING, DAY, EVENING));
     }
 
     public String getName() {

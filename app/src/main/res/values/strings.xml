@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">"WeatherParser "</string>
     <string name="select_city">Выбрать город</string>
-    <string name="update">Обновить</string>
+    <string name="update">Загрузить</string>
     <string name="load">Идет загрузка</string>
     <string name="no_data">Нет данных</string>
     <string name="load_error">Во время загрузки произошла ошибка</string>
