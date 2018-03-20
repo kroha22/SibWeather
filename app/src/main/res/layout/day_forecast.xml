@@ -1,0 +1,307 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/day_forecast_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/day_forecast_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/middle_h1_size"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/day_forecast_day_of_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/day_of_week"
+            android:textSize="@dimen/middle_h2_size"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/day_forecast_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/date"
+            android:textSize="@dimen/middle_h2_size"/>
+
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/day_forecast_header">
+
+        <LinearLayout
+            android:id="@+id/day_forecast_selected"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="120dp"
+            android:background="@drawable/bid_bubble_pie"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingLeft="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/day_forecast_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="@string/time"
+                android:textSize="@dimen/middle_h2_size"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingBottom="16dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/day_forecast_pic"
+                    android:layout_width="@dimen/weather_pic_width_big"
+                    android:layout_height="@dimen/weather_pic_height_big"
+                    android:src="@drawable/default_atm"/>
+
+                <TextView
+                    android:id="@+id/day_forecast_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_temp"
+                    android:textSize="@dimen/middle_h1_size"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wind"
+                    android:textSize="@dimen/middle_h3_size"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/day_forecast_wind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_wind"
+                    android:textSize="@dimen/middle_h3_size"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pressure"
+                    android:textSize="@dimen/middle_h3_size"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/day_forecast_pressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_press"
+                    android:textSize="@dimen/middle_h3_size"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/day_forecast_morning"
+            android:layout_width="@dimen/middle_bubble_d"
+            android:layout_height="@dimen/middle_bubble_d"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/small_bubble"
+            android:padding="4dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:maxLines="1"
+                android:text="Утро"
+                android:textSize="@dimen/small_bubble_h2_size"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/day_forecast_morning_pic"
+                android:layout_width="@dimen/weather_pic_width_middle"
+                android:layout_height="@dimen/weather_pic_height_middle"
+                android:padding="4dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/default_atm"/>
+
+            <TextView
+                android:id="@+id/day_forecast_morning_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/default_temp"
+                android:textSize="@dimen/small_bubble_h1_size"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/day_forecast_day"
+            android:layout_width="@dimen/middle_bubble_d"
+            android:layout_height="@dimen/middle_bubble_d"
+            android:layout_marginLeft="128dp"
+            android:layout_marginTop="116dp"
+            android:background="@drawable/small_bubble"
+            android:padding="4dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:maxLines="1"
+                android:text="День"
+                android:textSize="@dimen/small_bubble_h2_size"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/day_forecast_day_pic"
+                android:layout_width="@dimen/weather_pic_width_middle"
+                android:layout_height="@dimen/weather_pic_height_middle"
+                android:padding="4dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/default_atm"/>
+
+            <TextView
+                android:id="@+id/day_forecast_day_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/default_temp"
+                android:textSize="@dimen/small_bubble_h1_size"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/day_forecast_evening"
+            android:layout_width="@dimen/middle_bubble_d"
+            android:layout_height="@dimen/middle_bubble_d"
+            android:layout_marginLeft="216dp"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/small_bubble"
+            android:padding="4dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:maxLines="1"
+                android:text="Вечер"
+                android:textSize="@dimen/small_bubble_h2_size"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/day_forecast_evening_pic"
+                android:layout_width="@dimen/weather_pic_width_middle"
+                android:layout_height="@dimen/weather_pic_height_middle"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/default_atm"/>
+
+            <TextView
+                android:id="@+id/day_forecast_evening_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/default_temp"
+                android:textSize="@dimen/small_bubble_h1_size"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/day_forecast_night"
+            android:layout_width="@dimen/middle_bubble_d"
+            android:layout_height="@dimen/middle_bubble_d"
+            android:layout_marginLeft="268dp"
+            android:layout_marginTop="310dp"
+            android:background="@drawable/small_bubble"
+            android:padding="4dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:maxLines="1"
+                android:text="Ночь"
+                android:textSize="@dimen/small_bubble_h2_size"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/day_forecast_night_pic"
+                android:layout_width="@dimen/weather_pic_width_middle"
+                android:layout_height="@dimen/weather_pic_height_middle"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/default_atm"/>
+
+            <TextView
+                android:id="@+id/day_forecast_night_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:text="@string/default_temp"
+                android:textSize="@dimen/small_bubble_h1_size"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>
