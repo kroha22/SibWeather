@@ -24,28 +24,28 @@ import java.util.Map;
  * Created by Olga
  * on 17.01.2017.
  */
-
 public class Db {
     //--------------------------------------------------------------------------------------------
+    private static final int DB_VERSION = 1;
+    //--------------------------------------------------------------------------------------------
     public static class DbHelper extends OrmLiteSqliteOpenHelper {
-        public static final String DB_NAME = "sib_weather";
-        public static final int DB_VERSION = 1;
+        private static final String DB_NAME = "sib_weather";
 
-        private static DbHelper sInstance;
+        private static DbHelper helper;
 
-        private Dao<DbTables.Forecast, Integer> mForecastsDao;
-        private Dao<DbTables.DayDetailForecast, Integer> mDetailForecastsDao;
+        private Dao<DbTables.Forecast, Integer> forecastsDao;
+        private Dao<DbTables.DayDetailForecast, Integer> detailForecastsDao;
 
         public static DbHelper getInstance(Context context) {
-            if (sInstance == null) {
+            if (helper == null) {
                 synchronized (DbHelper.class) {
-                    if (sInstance == null) {
-                        sInstance = OpenHelperManager.getHelper(context, DbHelper.class);
+                    if (helper == null) {
+                        helper = OpenHelperManager.getHelper(context, DbHelper.class);
                     }
                 }
             }
 
-            return sInstance;
+            return helper;
         }
 
         public DbHelper(Context context) {
@@ -63,22 +63,20 @@ public class Db {
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
+        public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {/**/}
 
+        Dao<DbTables.Forecast, Integer> getForecastsDao() throws SQLException, java.sql.SQLException {
+            if (forecastsDao == null) {
+                forecastsDao = getDao(DbTables.Forecast.class);
+            }
+            return forecastsDao;
         }
 
-        public Dao<DbTables.Forecast, Integer> getForecastsDao() throws SQLException, java.sql.SQLException {
-            if (mForecastsDao == null) {
-                mForecastsDao = getDao(DbTables.Forecast.class);
+        Dao<DbTables.DayDetailForecast, Integer> getDetailForecastsDao() throws SQLException, java.sql.SQLException {
+            if (detailForecastsDao == null) {
+                detailForecastsDao = getDao(DbTables.DayDetailForecast.class);
             }
-            return mForecastsDao;
-        }
-
-        public Dao<DbTables.DayDetailForecast, Integer> getDetailForecastsDao() throws SQLException, java.sql.SQLException {
-            if (mDetailForecastsDao == null) {
-                mDetailForecastsDao = getDao(DbTables.DayDetailForecast.class);
-            }
-            return mDetailForecastsDao;
+            return detailForecastsDao;
         }
 
     }

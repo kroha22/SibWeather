@@ -4,51 +4,61 @@ import com.example.sibweather.model.DayPeriod;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Serializable;
+/**
+ * Created by Olga
+ * on 17.01.2017.
+ */
+public class DetailForecast {
 
-public class DetailForecast implements Serializable {
+    private final @NotNull DayPeriod dayPeriod;
+    private final @NotNull Property temperature;
+    private final @NotNull Property pressure;
+    private final @NotNull Wind wind;
+    private final @NotNull String iconPath;
+    private final @NotNull String bigIconPath;
 
-    private final @NotNull DayPeriod mDayPeriod;
-    private final @NotNull Property mTemperature;
-    private final @NotNull Property mPressure;
-    private final @NotNull Wind mWind;
-    private final @NotNull String mIconPath;
-
-    public DetailForecast(@NotNull DayPeriod mDayPeriod,
-                          @NotNull Property mTemperature,
-                          @NotNull Property mPressure,
-                          @NotNull Wind mWind,
-                          @NotNull String mIconPath) {
-        this.mDayPeriod = mDayPeriod;
-        this.mTemperature = mTemperature;
-        this.mPressure = mPressure;
-        this.mWind = mWind;
-        this.mIconPath = mIconPath;
+    public DetailForecast(@NotNull DayPeriod dayPeriod,
+                          @NotNull Property temperature,
+                          @NotNull Property pressure,
+                          @NotNull Wind wind,
+                          @NotNull String iconPath,
+                          @NotNull String bigIconPath) {
+        this.dayPeriod = dayPeriod;
+        this.temperature = temperature;
+        this.pressure = pressure;
+        this.wind = wind;
+        this.iconPath = iconPath;
+        this.bigIconPath = bigIconPath;
     }
 
     @NotNull
     public DayPeriod getDayPeriod() {
-        return mDayPeriod;
+        return dayPeriod;
     }
 
     @NotNull
     public Property getTemperature() {
-        return mTemperature;
+        return temperature;
     }
 
     @NotNull
     public Property getPressure() {
-        return mPressure;
+        return pressure;
     }
 
     @NotNull
     public Wind getWind() {
-        return mWind;
+        return wind;
     }
 
     @NotNull
     public String getIconPath() {
-        return mIconPath;
+        return iconPath;
+    }
+
+    @NotNull
+    public String getBigIconPath() {
+        return bigIconPath;
     }
 
 }

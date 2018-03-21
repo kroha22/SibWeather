@@ -4,35 +4,40 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+/**
+ * Created by Olga
+ * on 17.01.2017.
+ */
 public class Direction extends Atmosphere implements Serializable {
 
     @SerializedName("title_letter")
-    private String mTitleLetter;
+    private String titleLetter;
 
     @SerializedName("title_short")
-    private String mTitleShort;
+    private String titleShort;
 
     public Direction() {/**/}
 
     public Direction(String title, String val, String titleLetter, String titleShort) {
         super(title, val);
-        this.mTitleLetter = titleLetter;
-        this.mTitleShort = titleShort;
+
+        this.titleLetter = titleLetter;
+        this.titleShort = titleShort;
     }
 
     public String getTitleLetter() {
-        return mTitleLetter;
+        return titleLetter;
     }
 
     public void setTitleLetter(String titleLetter) {
-        mTitleLetter = titleLetter;
+        this.titleLetter = titleLetter;
     }
 
     public String getTitleShort() {
-        return mTitleShort;
+        return titleShort;
     }
 
     public void setTitleShort(String titleShort) {
-        mTitleShort = titleShort;
+        this.titleShort = titleShort;
     }
 }

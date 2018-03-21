@@ -5,33 +5,32 @@ import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.example.sibweather.model.City;
 import com.example.sibweather.model.forecast.DayForecast;
-import com.example.sibweather.model.forecast.DetailForecast;
+import com.example.sibweather.utils.Action;
+import com.example.sibweather.utils.Callable;
 
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.LocalDate;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 /**
- * Date: 12.09.16
- * Time: 12:12
- *
- * @author Olga
+ * Created by Olga
+ * on 30.09.2017.
  */
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface ForecastView extends MvpView {
 
     String PROGRESS_TAG = "ERROR_TAG";
 
-    void showSelectDialog(@NotNull String[] cities);
+    void showSelectDialog(@NotNull String[] cities, @NotNull Callable<String> onClick);
+
+    void showDialog(@NotNull String msg, @NotNull Action onPositive, @Nullable Action onNegative);
 
     @StateStrategyType(value = AddToEndSingleStrategy.class, tag = PROGRESS_TAG)
     void showLoadProgress();
 
-    void showForecast(@NotNull City city, @NotNull String[] cities, @NotNull List<DayForecast> forecasts);
+    void showForecast(@NotNull City city, @NotNull List<DayForecast> forecasts);
 
-    void showMessage(@NotNull String message);
-
-    void showDayForecast(@NotNull String title, @NotNull LocalDate day, @NotNull List<DetailForecast> forecasts);
+    void showDayForecast(@NotNull String title, @NotNull DayForecast dayForecast);
 
 }

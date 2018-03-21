@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ff92a3aa</color>
-    <color name="colorPrimaryDark">#ff647376</color>
-    <color name="colorAccent">#ffd6a44b</color>
-    <color name="colorBack">#cfcfcf</color>
-    <color name="colorText">#cf1b1b1b</color>
-    <color name="colorItem1">#ff92a3aa</color>
-    <color name="colorItem2">#ffacac8a</color>
+    <color name="colorPrimary">#5B7DA3</color>
+    <color name="colorPrimaryDark">#253458</color>
+    <color name="colorAccent">#a35b7d</color>
 
-    <color name="small_bubble_color">#409bb6</color>
-    <color name="middle_bubble_color">#664ab7</color>
-    <color name="big_bubble_color">#606a87</color>
+    <color name="blue">#66AECE</color>
+    <color name="green">#7da35b</color>
+    <color name="white">#ffffff</color>
+    <color name="lightBlue">#ceeefc</color>
+    <color name="lightGreen">#befc87</color>
 
 </resources>

@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Olga
- * on 15.09.2016.
+ * on 30.09.2017.
  */
 public enum City {
     NSK("Новосибирск"),
@@ -15,14 +15,15 @@ public enum City {
     KEMEROVO("Кемерово"),
     IRKUTSK("Иркутск");
 
-    private final @NotNull String mVal;
+    private final @NotNull String val;
 
     City(@NotNull String val) {
-        mVal = val;
+        this.val = val;
     }
 
+    @NotNull
     public String getVal() {
-        return mVal;
+        return val;
     }
 
     //--------------------------------------------------------------------------------------------
@@ -34,6 +35,18 @@ public enum City {
             }
         }
         throw new IllegalArgumentException("Unknown city \"" + name + "\"");
+    }
+
+    @NotNull
+    public static String[] getAllCitiesNames() {
+        final City[] cities = City.values();
+
+        final String[] names = new String[cities.length];
+
+        for (int i = 0; i < cities.length; i++) {
+            names[i] = cities[i].getVal();
+        }
+        return names;
     }
     //--------------------------------------------------------------------------------------------
 

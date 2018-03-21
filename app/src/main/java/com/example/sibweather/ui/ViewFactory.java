@@ -1,39 +1,56 @@
 package com.example.sibweather.ui;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.sibweather.R;
+import com.example.sibweather.model.forecast.DayForecast;
+import com.example.sibweather.model.forecast.DetailForecast;
+import com.example.sibweather.utils.TimeUtils;
 
 import org.jetbrains.annotations.NotNull;
 
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
+import static com.example.sibweather.ui.ImageUtils.loadMiddleIconInto;
 
 /**
  * Created by Olga
  * on 30.09.2017.
  */
-
 class ViewFactory {
 
     static View getProgressView(@NotNull Context context) {
         return LayoutInflater.from(context).inflate(R.layout.progress_view, null, false);
     }
 
-    static View getMessageView(@NotNull Context context, @NotNull String message) {
-        final FrameLayout layout = new FrameLayout(context);
-        layout.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+    @NotNull
+    static View getDayWeatherView(@NotNull Context context, @NotNull DayForecast forecast) {
+        final LinearLayout mainView = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.weather_day, null, false);
 
-        final TextView messageView = new TextView(context);
-        messageView.setText(message);
-        messageView.setTextSize(COMPLEX_UNIT_SP, context.getResources().getDimension(R.dimen.default_text_size));
-        layout.addView(messageView, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER));
+        final TextView date = (TextView) mainView.findViewById(R.id.today_weather_date);
+        final TextView day = (TextView) mainView.findViewById(R.id.today_weather_day_of_week);
+        final ImageView weatherImg = (ImageView) mainView.findViewById(R.id.today_weather_pic);
+        final TextView temp = (TextView) mainView.findViewById(R.id.today_weather_temp);
 
-        return layout;
+        initWeatherView(date, day, temp, forecast);
+        loadMiddleIconInto(weatherImg, forecast.getIconPath());
+
+        return mainView;
+    }
+
+    private static void initWeatherView(@NotNull TextView date,
+                                        @NotNull TextView day,
+                                        @NotNull TextView temp,
+                                        @NotNull DayForecast forecast) {
+        day.setText(TimeUtils.getDayOfWeekShort(forecast.getDate()));
+        date.setText(TimeUtils.getShortDate(forecast.getDate()));
+
+        final DetailForecast dayForecast = forecast.getDetail().get(2);
+        final int tempInt = dayForecast.getTemperature().getAvg();
+        final String tempStr = tempInt > 0 ? "+" + tempInt : Integer.toString(tempInt);
+        temp.setText(tempStr);
     }
 }

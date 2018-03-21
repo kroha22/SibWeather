@@ -4,104 +4,116 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+/**
+ * Created by Olga
+ * on 17.01.2017.
+ */
 public class Hour implements Serializable {
 
     @SerializedName("hour")
-    private int mHour;
+    private int hour;
 
     @SerializedName("temperature")
-    private Property mTemperature;
+    private Property temperature;
 
     @SerializedName("pressure")
-    private Property mPressure;
+    private Property pressure;
 
     @SerializedName("humidity")
-    private Property mHumidity;
+    private Property humidity;
 
     @SerializedName("wind")
-    private Wind mWind;
+    private Wind wind;
 
     @SerializedName("cloud")
-    private Atmosphere mCloud;
+    private Atmosphere cloud;
 
     @SerializedName("precipitation")
-    private Atmosphere mPrecipitation;
+    private Atmosphere precipitation;
 
     @SerializedName("icon")
-    private String mIcon;
+    private String icon;
 
     @SerializedName("icon_path")
-    private String mIcon_path;
+    private String iconPath;
 
     public int getHour() {
-        return mHour;
+        return hour;
     }
 
     public void setHour(int hour) {
-        mHour = hour;
+        this.hour = hour;
     }
 
     public Property getTemperature() {
-        return mTemperature;
+        return temperature;
     }
 
     public void setTemperature(Property temperature) {
-        mTemperature = temperature;
+        this.temperature = temperature;
     }
 
     public Property getPressure() {
-        return mPressure;
+        return pressure;
     }
 
     public void setPressure(Property pressure) {
-        mPressure = pressure;
+        this.pressure = pressure;
     }
 
     public Property getHumidity() {
-        return mHumidity;
+        return humidity;
     }
 
     public void setHumidity(Property humidity) {
-        mHumidity = humidity;
+        this.humidity = humidity;
     }
 
     public Wind getWind() {
-        return mWind;
+        return wind;
     }
 
     public void setWind(Wind wind) {
-        mWind = wind;
+        this.wind = wind;
     }
 
     public Atmosphere getCloud() {
-        return mCloud;
+        return cloud;
     }
 
     public void setCloud(Atmosphere cloud) {
-        mCloud = cloud;
+        this.cloud = cloud;
     }
 
     public Atmosphere getPrecipitation() {
-        return mPrecipitation;
+        return precipitation;
     }
 
     public void setPrecipitation(Atmosphere precipitation) {
-        mPrecipitation = precipitation;
+        this.precipitation = precipitation;
     }
 
     public String getIcon() {
-        return mIcon;
+        return icon;
     }
 
     public void setIcon(String icon) {
-        mIcon = icon;
+        this.icon = icon;
     }
 
     public String getIcon_path() {
-        return mIcon_path;
+        return iconPath;
     }
 
-    public void setIcon_path(String icon_path) {
-        mIcon_path = icon_path;
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
+    }
+
+    public String getIconPath() {
+        return iconPath.replace("small", "big");
+    }
+
+    public String getBigIconPath() {
+        return iconPath.replace("small", "big-icons");
     }
 }

@@ -5,14 +5,13 @@ import android.support.test.espresso.core.deps.guava.collect.Lists;
 
 import com.example.sibweather.model.City;
 import com.example.sibweather.model.DayPeriod;
+import com.example.sibweather.utils.TimeUtils;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.Instant;
-import org.joda.time.LocalDate;
 
 import java.util.Collection;
 
@@ -21,7 +20,7 @@ import java.util.Collection;
  * on 17.01.2017.
  */
 public class DbTables {
-
+    //------------------------------------------------------------------------------------------------
     @DatabaseTable(tableName = Forecast.TABLE)
     public static class Forecast {
         public static final String TABLE = "forecasts";
@@ -33,57 +32,66 @@ public class DbTables {
         }
 
         @DatabaseField(generatedId = true, unique = true)
-        private int mId;
+        private int id;
 
         @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Column.CITY)
-        private String mCity;
+        private String city;
 
         @DatabaseField(canBeNull = false, dataType = DataType.LONG, columnName = Column.LOCAL_DATE)
-        private long mLocalDate;
+        private long localDate;
 
         @ForeignCollectionField(columnName = Column.DETAILS, eager = true)
-        private Collection<DayDetailForecast> mDetails;
+        private Collection<DayDetailForecast> details;
 
         public Forecast() {/**/}
 
-        public Forecast(@NotNull City city, @NotNull DayForecast forecast) {
-            mCity = city.name();
-            mLocalDate = new Instant(forecast.getDate()).getMillis();
-            mDetails = Lists.newArrayList(Iterables.transform(forecast.getDetail(), detail -> new DayDetailForecast(this, detail)));
+        Forecast(@NotNull City city, @NotNull DayForecast forecast) {
+            this.city = city.name();
+            this.localDate = TimeUtils.getMillis(forecast.getDate());
+            this.details = Lists.newArrayList(Iterables.transform(forecast.getDetail(), detail -> new DayDetailForecast(this, detail)));
+        }
+
+        DayForecast asDayForecast() {
+            return new DayForecast(
+                    TimeUtils.fromMillis(localDate),
+                    Lists.newArrayList(Iterables.transform(details, DayDetailForecast::asDetailForecast))
+            );
         }
 
         public int getId() {
-            return mId;
+            return id;
         }
 
         public void setId(int id) {
-            mId = id;
+            this.id = id;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
         }
 
         public long getLocalDate() {
-            return mLocalDate;
+            return localDate;
         }
 
         public void setLocalDate(long mLocalDate) {
-            this.mLocalDate = mLocalDate;
+            this.localDate = mLocalDate;
         }
 
         public Collection<DayDetailForecast> getDetails() {
-            return mDetails;
+            return details;
         }
 
         public void setDetails(Collection<DayDetailForecast> mDetails) {
-            this.mDetails = mDetails;
-        }
-
-        public DayForecast asDayForecast() {
-            return new DayForecast(
-                    new LocalDate(mLocalDate),
-                    Lists.newArrayList(Iterables.transform(mDetails, DayDetailForecast::asDetailForecast))
-            );
+            this.details = mDetails;
         }
     }
 
+    //------------------------------------------------------------------------------------------------
     @DatabaseTable(tableName = DayDetailForecast.TABLE)
     public static class DayDetailForecast {
         public static final String TABLE = "day_detail_forecasts";
@@ -106,79 +114,95 @@ public class DbTables {
             public static final String WIND_DIR_TITLE_LETTER = "wind_dir_title_letter";
             public static final String WIND_DIR_TITLE_SHORT = "wind_dir_title_short";
             public static final String ICON_PATH = "icon_path";
+            public static final String BIG_ICON_PATH = "big_icon_path";
         }
 
         @DatabaseField(generatedId = true)
         private int mId;
 
         @DatabaseField(foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true, columnName = Column.FORECAST)
-        private Forecast mForecast;
+        private Forecast forecast;
 
         @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Column.DAY_PERIOD, unique = true)
-        private String mDayPeriod;
+        private String dayPeriod;
 
         @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Column.TEMP_MIN)
-        private int mTempMin;
+        private int tempMin;
 
         @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Column.TEMP_MAX)
-        private int mTempMax;
+        private int tempMax;
 
         @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Column.TEMP_AVG)
-        private int mTempAvg;
+        private int tempAvg;
 
         @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Column.PRESS_MIN)
-        private int mPressMin;
+        private int pressMin;
 
         @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Column.PRESS_MAX)
-        private int mPressMax;
+        private int pressMax;
 
         @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Column.PRESS_AVG)
-        private int mPressAvg;
+        private int pressAvg;
 
         @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Column.WIND_MIN)
-        private int mWindMin;
+        private int windMin;
 
         @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Column.WIND_MAX)
-        private int mWindMax;
+        private int windMax;
 
         @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Column.WIND_AVG)
-        private int mWindAvg;
+        private int windAvg;
 
         @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Column.WIND_DIR_TITLE)
-        private String mWindTitle;
+        private String windTitle;
 
         @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Column.WIND_DIR_VAL)
-        private String mWindVal;
+        private String windVal;
 
         @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Column.WIND_DIR_TITLE_LETTER)
-        private String mWindTitleLetter;
+        private String windTitleLetter;
 
         @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Column.WIND_DIR_TITLE_SHORT)
-        private String mWindTitleShort;
+        private String windTitleShort;
 
         @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Column.ICON_PATH)
-        private String mIconPath;
+        private String iconPath;
+
+        @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Column.BIG_ICON_PATH)
+        private String bigIconPath;
 
         public DayDetailForecast() {/**/}
 
-        public DayDetailForecast(@NotNull Forecast common, @NotNull DetailForecast forecast) {
-            this.mForecast = common;
+        DayDetailForecast(@NotNull Forecast common, @NotNull DetailForecast forecast) {
+            this.forecast = common;
 
-            this.mDayPeriod = forecast.getDayPeriod().name();
-            this.mTempMin = forecast.getTemperature().getMin();
-            this.mTempMax = forecast.getTemperature().getMax();
-            this.mTempAvg = forecast.getTemperature().getAvg();
-            this.mPressMin = forecast.getPressure().getMin();
-            this.mPressMax = forecast.getPressure().getMax();
-            this.mPressAvg = forecast.getPressure().getAvg();
-            this.mWindMin = forecast.getWind().getSpeed().getMin();
-            this.mWindMax = forecast.getWind().getSpeed().getMax();
-            this.mWindAvg = forecast.getWind().getSpeed().getAvg();
-            this.mWindTitle = forecast.getWind().getDirection().getTitle();
-            this.mWindVal = forecast.getWind().getDirection().getValue();
-            this.mWindTitleLetter = forecast.getWind().getDirection().getTitleLetter();
-            this.mWindTitleShort = forecast.getWind().getDirection().getTitleShort();
-            this.mIconPath = forecast.getIconPath();
+            this.dayPeriod = forecast.getDayPeriod().name();
+            this.tempMin = forecast.getTemperature().getMin();
+            this.tempMax = forecast.getTemperature().getMax();
+            this.tempAvg = forecast.getTemperature().getAvg();
+            this.pressMin = forecast.getPressure().getMin();
+            this.pressMax = forecast.getPressure().getMax();
+            this.pressAvg = forecast.getPressure().getAvg();
+            this.windMin = forecast.getWind().getSpeed().getMin();
+            this.windMax = forecast.getWind().getSpeed().getMax();
+            this.windAvg = forecast.getWind().getSpeed().getAvg();
+            this.windTitle = forecast.getWind().getDirection().getTitle();
+            this.windVal = forecast.getWind().getDirection().getValue();
+            this.windTitleLetter = forecast.getWind().getDirection().getTitleLetter();
+            this.windTitleShort = forecast.getWind().getDirection().getTitleShort();
+            this.iconPath = forecast.getIconPath();
+            this.iconPath = forecast.getBigIconPath();
+        }
+
+        DetailForecast asDetailForecast() {
+            return new DetailForecast(
+                    DayPeriod.valueOf(dayPeriod),
+                    new Property(tempMin, tempMax, tempAvg),
+                    new Property(pressMin, pressMax, pressAvg),
+                    new Wind(new Property(windMin, windMax, windAvg), new Direction(windTitle, windVal, windTitleLetter, windTitleShort)),
+                    iconPath,
+                    bigIconPath
+            );
         }
 
         public int getId() {
@@ -190,142 +214,141 @@ public class DbTables {
         }
 
         public Forecast getForecast() {
-            return mForecast;
+            return forecast;
         }
 
         public void setForecast(Forecast mForecast) {
-            this.mForecast = mForecast;
+            this.forecast = mForecast;
         }
 
         public String getDayPeriod() {
-            return mDayPeriod;
+            return dayPeriod;
         }
 
         public void setDayPeriod(String mDayPeriod) {
-            this.mDayPeriod = mDayPeriod;
+            this.dayPeriod = mDayPeriod;
         }
 
         public int getTempMin() {
-            return mTempMin;
+            return tempMin;
         }
 
         public void setTempMin(int mTempMin) {
-            this.mTempMin = mTempMin;
+            this.tempMin = mTempMin;
         }
 
         public int getTempMax() {
-            return mTempMax;
+            return tempMax;
         }
 
         public void setTempMax(int mTempMax) {
-            this.mTempMax = mTempMax;
+            this.tempMax = mTempMax;
         }
 
         public int getTempAvg() {
-            return mTempAvg;
+            return tempAvg;
         }
 
         public void setTempAvg(int mTempAvg) {
-            this.mTempAvg = mTempAvg;
+            this.tempAvg = mTempAvg;
         }
 
         public int getPressMin() {
-            return mPressMin;
+            return pressMin;
         }
 
         public void setPressMin(int mPressMin) {
-            this.mPressMin = mPressMin;
+            this.pressMin = mPressMin;
         }
 
         public int getPressMax() {
-            return mPressMax;
+            return pressMax;
         }
 
         public void setPressMax(int mPressMax) {
-            this.mPressMax = mPressMax;
+            this.pressMax = mPressMax;
         }
 
         public int getPressAvg() {
-            return mPressAvg;
+            return pressAvg;
         }
 
         public void setPressAvg(int mPressAvg) {
-            this.mPressAvg = mPressAvg;
+            this.pressAvg = mPressAvg;
         }
 
         public int getWindMin() {
-            return mWindMin;
+            return windMin;
         }
 
         public void setWindMin(int mWindMin) {
-            this.mWindMin = mWindMin;
+            this.windMin = mWindMin;
         }
 
         public int getWindMax() {
-            return mWindMax;
+            return windMax;
         }
 
         public void setWindMax(int mWindMax) {
-            this.mWindMax = mWindMax;
+            this.windMax = mWindMax;
         }
 
         public int getWindAvg() {
-            return mWindAvg;
+            return windAvg;
         }
 
         public void setWindAvg(int mWindAvg) {
-            this.mWindAvg = mWindAvg;
+            this.windAvg = mWindAvg;
         }
 
         public String getWindTitle() {
-            return mWindTitle;
+            return windTitle;
         }
 
         public void setWindTitle(String mWindTitle) {
-            this.mWindTitle = mWindTitle;
+            this.windTitle = mWindTitle;
         }
 
         public String getWindVal() {
-            return mWindVal;
+            return windVal;
         }
 
         public void setWindVal(String mWindVal) {
-            this.mWindVal = mWindVal;
+            this.windVal = mWindVal;
         }
 
         public String getWindTitleLetter() {
-            return mWindTitleLetter;
+            return windTitleLetter;
         }
 
         public void setWindTitleLetter(String mWindTitleLetter) {
-            this.mWindTitleLetter = mWindTitleLetter;
+            this.windTitleLetter = mWindTitleLetter;
         }
 
         public String getWindTitleShort() {
-            return mWindTitleShort;
+            return windTitleShort;
         }
 
         public void setWindTitleShort(String mWindTitleShort) {
-            this.mWindTitleShort = mWindTitleShort;
+            this.windTitleShort = mWindTitleShort;
         }
 
         public String getIconPath() {
-            return mIconPath;
+            return iconPath;
         }
 
         public void setIconPath(String mIconPath) {
-            this.mIconPath = mIconPath;
+            this.iconPath = mIconPath;
         }
 
-        public DetailForecast asDetailForecast() {
-            return new DetailForecast(
-                    DayPeriod.valueOf(mDayPeriod),
-                    new Property(mTempMin, mTempMax, mTempAvg),
-                    new Property(mPressMin, mPressMax, mPressAvg),
-                    new Wind(new Property(mWindMin, mWindMax, mWindAvg), new Direction(mWindTitle, mWindVal, mWindTitleLetter, mWindTitleShort)),
-                    mIconPath
-            );
+        public String getBigIconPath() {
+            return bigIconPath;
+        }
+
+        public void setBigIconPath(String bigIconPath) {
+            this.bigIconPath = bigIconPath;
         }
     }
+    //------------------------------------------------------------------------------------------------
 
 }

@@ -4,39 +4,39 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+/**
+ * Created by Olga
+ * on 17.01.2017.
+ */
 public class Wind implements Serializable {
 
     @SerializedName("speed")
-    private Property mSpeed;
+    private Property speed;
 
     @SerializedName("direction")
-    private Direction mDirection;
+    private Direction direction;
 
     public Wind() {/**/}
 
-    public Wind(Property mSpeed, Direction mDirection) {
-        this.mSpeed = mSpeed;
-        this.mDirection = mDirection;
+    public Wind(Property speed, Direction direction) {
+        this.speed = speed;
+        this.direction = direction;
     }
 
     public Property getSpeed() {
-        return mSpeed;
+        return speed;
     }
 
     public void setSpeed(Property speed) {
-        mSpeed = speed;
+        this.speed = speed;
     }
 
     public Direction getDirection() {
-        return mDirection;
+        return direction;
     }
 
     public void setDirection(Direction direction) {
-        mDirection = direction;
+        this.direction = direction;
     }
 
-    @Override
-    public String toString() {
-        return mSpeed.getMin() + "-" + mSpeed.getMax() + " " + mDirection.getTitleShort();
-    }
 }

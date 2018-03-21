@@ -4,16 +4,20 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+/**
+ * Created by Olga
+ * on 17.01.2017.
+ */
 public class ResultSet implements Serializable {
 
     @SerializedName("count")
-    private int mCount;
+    private int count;
 
     public int getCount() {
-        return mCount;
+        return count;
     }
 
     public void setCount(int count) {
-        mCount = count;
+        this.count = count;
     }
 }

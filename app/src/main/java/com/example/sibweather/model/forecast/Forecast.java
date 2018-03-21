@@ -5,49 +5,53 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Created by Olga
+ * on 17.01.2017.
+ */
 public class Forecast implements Serializable {
 
     @SerializedName("date")
-    private String mDate;
+    private String date;
 
     @SerializedName("hours")
-    private List<Hour> mHours;
+    private List<Hour> hours;
 
     @SerializedName("astronomy")
-    private Atmosphere mAstronomy;
+    private Astronomy astronomy;
 
     @SerializedName("links")
-    private Links mLinks;
+    private Links links;
 
     public String getDate() {
-        return mDate;
+        return date;
     }
 
     public void setDate(String date) {
-        mDate = date;
+        this.date = date;
     }
 
     public List<Hour> getHours() {
-        return mHours;
+        return hours;
     }
 
     public void setHours(List<Hour> hours) {
-        mHours = hours;
+        this.hours = hours;
     }
 
-    public Atmosphere getAstronomy() {
-        return mAstronomy;
+    public Astronomy getAstronomy() {
+        return astronomy;
     }
 
-    public void setAstronomy(Atmosphere astronomy) {
-        mAstronomy = astronomy;
+    public void setAstronomy(Astronomy astronomy) {
+        this.astronomy = astronomy;
     }
 
     public Links getLinks() {
-        return mLinks;
+        return links;
     }
 
     public void setLinks(Links links) {
-        mLinks = links;
+        this.links = links;
     }
 }

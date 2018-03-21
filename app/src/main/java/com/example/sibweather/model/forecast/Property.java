@@ -4,46 +4,50 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+/**
+ * Created by Olga
+ * on 17.01.2017.
+ */
 public class Property implements Serializable {
 
     @SerializedName("min")
-    private int mMin;
+    private int min;
 
     @SerializedName("max")
-    private int mMax;
+    private int max;
 
     @SerializedName("avg")
-    private int mAvg;
+    private int avg;
 
     public Property() {/**/}
 
-    public Property(int mMin, int mMax, int mAvg) {
-        this.mMin = mMin;
-        this.mMax = mMax;
-        this.mAvg = mAvg;
+    public Property(int min, int max, int avg) {
+        this.min = min;
+        this.max = max;
+        this.avg = avg;
     }
 
     public int getMin() {
-        return mMin;
+        return min;
     }
 
     public void setMin(int min) {
-        mMin = min;
+        this.min = min;
     }
 
     public int getMax() {
-        return mMax;
+        return max;
     }
 
     public void setMax(int max) {
-        mMax = max;
+        this.max = max;
     }
 
     public int getAvg() {
-        return mAvg;
+        return avg;
     }
 
     public void setAvg(int avg) {
-        mAvg = avg;
+        this.avg = avg;
     }
 }

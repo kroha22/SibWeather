@@ -4,34 +4,38 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+/**
+ * Created by Olga
+ * on 17.01.2017.
+ */
 public class Atmosphere implements Serializable {
 
     @SerializedName("title")
-    private String mTitle;
+    private String title;
 
     @SerializedName("value")
-    private String mValue;
+    private String value;
 
     public Atmosphere() {/**/}
 
-    public Atmosphere(String mTitle, String mValue) {
-        this.mTitle = mTitle;
-        this.mValue = mValue;
+    public Atmosphere(String title, String value) {
+        this.title = title;
+        this.value = value;
     }
 
     public String getTitle() {
-        return mTitle;
+        return title;
     }
 
     public void setTitle(String title) {
-        mTitle = title;
+        this.title = title;
     }
 
     public String getValue() {
-        return mValue;
+        return value;
     }
 
     public void setValue(String value) {
-        mValue = value;
+        this.value = value;
     }
 }

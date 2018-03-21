@@ -2,31 +2,18 @@ package com.example.sibweather.model;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
- * Date: 08.09.16
- * Time: 22:21
- *
- * @author Olga
+ * Created by Olga
+ * on 30.09.2017.
  */
 public enum DayPeriod {
 
-    MORNING("утро", 0),
-    DAY("день", 1),
-    EVENING("вечер", 2),
-    NIGHT("ночь", 3);
+    MORNING("Утро", 0),
+    DAY("День", 1),
+    EVENING("Вечер", 2),
+    NIGHT("Ночь", 3);
 
-    private final int mDayPeriod;
-    private final @NotNull String mVal;
-
-    DayPeriod(String val, int dayPath) {
-        mVal = val;
-        mDayPeriod = dayPath;
-    }
-
+    //-------------------------------------------------------------------------------------------------
     public static DayPeriod getByHours(int hours) {
         final int currentDayPath = hours / 6;
 
@@ -47,17 +34,23 @@ public enum DayPeriod {
                 throw new AssertionError("Error hours " + hours + ": hours must be > 0 and < 24");
         }
     }
+    //-------------------------------------------------------------------------------------------------
 
-    public static List<DayPeriod> getTime() {
-        return new ArrayList<>(Arrays.asList(NIGHT, MORNING, DAY, EVENING));
+    private final int dayPeriod;
+    private final @NotNull String val;
+
+    DayPeriod(@NotNull String val, int dayPath) {
+        this.val = val;
+        this.dayPeriod = dayPath;
     }
 
+    @NotNull
     public String getVal() {
-        return mVal;
+        return val;
     }
 
-    public boolean include(int hour){
+    public boolean include(int hour) {
         final int dayPath = hour / 6;
-        return dayPath == mDayPeriod;
+        return dayPath == dayPeriod;
     }
 }
