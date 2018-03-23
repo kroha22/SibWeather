@@ -4,17 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.sibweather.R;
 import com.example.sibweather.model.forecast.DayForecast;
-import com.example.sibweather.model.forecast.DetailForecast;
 import com.example.sibweather.utils.TimeUtils;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.example.sibweather.ui.ImageUtils.loadMiddleIconInto;
+import static com.example.sibweather.ui.ImageUtils.loadSmallIconInto;
 
 /**
  * Created by Olga
@@ -28,7 +27,7 @@ class ViewFactory {
 
     @NotNull
     static View getDayWeatherView(@NotNull Context context, @NotNull DayForecast forecast) {
-        final LinearLayout mainView = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.weather_day, null, false);
+        final RelativeLayout mainView = (RelativeLayout) LayoutInflater.from(context).inflate(R.layout.weather_day, null, false);
 
         final TextView date = (TextView) mainView.findViewById(R.id.today_weather_date);
         final TextView day = (TextView) mainView.findViewById(R.id.today_weather_day_of_week);
@@ -36,7 +35,7 @@ class ViewFactory {
         final TextView temp = (TextView) mainView.findViewById(R.id.today_weather_temp);
 
         initWeatherView(date, day, temp, forecast);
-        loadMiddleIconInto(weatherImg, forecast.getIconPath());
+        loadSmallIconInto(weatherImg, forecast.getIconPath());
 
         return mainView;
     }
@@ -48,8 +47,7 @@ class ViewFactory {
         day.setText(TimeUtils.getDayOfWeekShort(forecast.getDate()));
         date.setText(TimeUtils.getShortDate(forecast.getDate()));
 
-        final DetailForecast dayForecast = forecast.getDetail().get(2);
-        final int tempInt = dayForecast.getTemperature().getAvg();
+        final int tempInt = forecast.getTemperature().getAvg();
         final String tempStr = tempInt > 0 ? "+" + tempInt : Integer.toString(tempInt);
         temp.setText(tempStr);
     }

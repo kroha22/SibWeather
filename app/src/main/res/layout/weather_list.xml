@@ -1,122 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical">
 
     <TextView
         android:id="@+id/weather_list_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:textSize="@dimen/big_h2_size"
         android:textStyle="bold"/>
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/weather_list_0"
-            android:layout_width="@dimen/big_bubble_d"
-            android:layout_height="@dimen/big_bubble_d"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="44dp"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/lightOrange"
+            android:gravity="center"
+            android:orientation="vertical"/>
 
         <LinearLayout
             android:id="@+id/weather_list_1"
-            android:layout_width="@dimen/big_bubble_d"
-            android:layout_height="@dimen/big_bubble_d"
-            android:layout_gravity="right"
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="4dp"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/orange"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
 
         <LinearLayout
             android:id="@+id/weather_list_2"
-            android:layout_width="@dimen/big_bubble_d"
-            android:layout_height="@dimen/big_bubble_d"
-            android:layout_marginLeft="48dp"
-            android:layout_marginTop="164dp"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/lightOlive"
+            android:gravity="center"
+            android:orientation="vertical"/>
 
         <LinearLayout
             android:id="@+id/weather_list_3"
-            android:layout_width="@dimen/big_bubble_d"
-            android:layout_height="@dimen/big_bubble_d"
-            android:layout_gravity="right"
-            android:layout_marginLeft="228dp"
-            android:layout_marginTop="184dp"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/olive"
+            android:gravity="center"
+            android:orientation="vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/weather_list_4"
-            android:layout_width="@dimen/big_bubble_d"
-            android:layout_height="@dimen/big_bubble_d"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="352dp"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/lightGray"
+            android:gravity="center"
+            android:orientation="vertical"/>
 
         <LinearLayout
             android:id="@+id/weather_list_5"
-            android:layout_width="@dimen/big_bubble_d"
-            android:layout_height="@dimen/big_bubble_d"
-            android:layout_gravity="right"
-            android:layout_marginLeft="144dp"
-            android:layout_marginTop="304dp"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/gray"
+            android:gravity="center"
+            android:orientation="vertical"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/weather_list_6"
-            android:layout_width="@dimen/big_bubble_d"
-            android:layout_height="@dimen/big_bubble_d"
-            android:layout_marginLeft="264dp"
-            android:layout_marginTop="352dp"
-            android:orientation="vertical"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.v7.widget.ButtonBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/weather_list_button_change"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/blue"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:text="@string/select_city"/>
+            android:background="@color/lightBlue"
+            android:gravity="center"
+            android:orientation="vertical"/>
 
-        <Button
-            android:id="@+id/weather_list_button_update"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_margin="4dp"
-            android:background="@color/green"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="@string/update"/>
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <Button
+                android:id="@+id/weather_list_button_change"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:background="@color/blue"
+                android:text="@string/select_city"/>
 
-    </android.support.v7.widget.ButtonBarLayout>
+            <Button
+                android:id="@+id/weather_list_button_update"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/green"
+                android:text="@string/update"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

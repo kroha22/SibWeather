@@ -4,10 +4,20 @@
     <color name="colorPrimaryDark">#253458</color>
     <color name="colorAccent">#a35b7d</color>
 
-    <color name="blue">#66AECE</color>
+    <color name="orange">#FEBB55</color>
+    <color name="lightOrange">#FED972</color>
+
+    <color name="olive">#bcbc78</color>
+    <color name="lightOlive">#C8C8A3</color>
+
+    <color name="gray">#A7B7B7</color>
+    <color name="lightGray">#BBCBCB</color>
+
+    <color name="blue">#659db6</color>
+    <color name="lightBlue">#8ab2c4</color>
+
     <color name="green">#7da35b</color>
+
     <color name="white">#ffffff</color>
-    <color name="lightBlue">#ceeefc</color>
-    <color name="lightGreen">#befc87</color>
 
 </resources>

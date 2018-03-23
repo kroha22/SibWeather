@@ -57,12 +57,7 @@ final class DayForecastView {
 
         private void setSelected(Context context, boolean isSelected) {
             final Drawable background = ContextCompat.getDrawable(context, isSelected ? R.drawable.green_bubble : R.drawable.blue_bubble);
-
-            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                mainView.setBackgroundDrawable(background);
-            } else {
-                mainView.setBackground(background);
-            }
+            mainView.setBackground(background);
         }
     }
 

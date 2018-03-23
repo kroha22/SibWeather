@@ -1,17 +1,9 @@
 package com.example.sibweather.model.forecast;
 
-import android.support.test.espresso.core.deps.guava.collect.Iterables;
-import android.support.test.espresso.core.deps.guava.collect.Lists;
-
-import com.example.sibweather.model.City;
-import com.example.sibweather.model.DayPeriod;
-import com.example.sibweather.utils.TimeUtils;
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 
@@ -44,19 +36,6 @@ public class DbTables {
         private Collection<DayDetailForecast> details;
 
         public Forecast() {/**/}
-
-        Forecast(@NotNull City city, @NotNull DayForecast forecast) {
-            this.city = city.name();
-            this.localDate = TimeUtils.getMillis(forecast.getDate());
-            this.details = Lists.newArrayList(Iterables.transform(forecast.getDetail(), detail -> new DayDetailForecast(this, detail)));
-        }
-
-        DayForecast asDayForecast() {
-            return new DayForecast(
-                    TimeUtils.fromMillis(localDate),
-                    Lists.newArrayList(Iterables.transform(details, DayDetailForecast::asDetailForecast))
-            );
-        }
 
         public int getId() {
             return id;
@@ -123,7 +102,7 @@ public class DbTables {
         @DatabaseField(foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true, columnName = Column.FORECAST)
         private Forecast forecast;
 
-        @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Column.DAY_PERIOD, unique = true)
+        @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = Column.DAY_PERIOD)
         private String dayPeriod;
 
         @DatabaseField(canBeNull = false, dataType = DataType.INTEGER, columnName = Column.TEMP_MIN)
@@ -172,38 +151,6 @@ public class DbTables {
         private String bigIconPath;
 
         public DayDetailForecast() {/**/}
-
-        DayDetailForecast(@NotNull Forecast common, @NotNull DetailForecast forecast) {
-            this.forecast = common;
-
-            this.dayPeriod = forecast.getDayPeriod().name();
-            this.tempMin = forecast.getTemperature().getMin();
-            this.tempMax = forecast.getTemperature().getMax();
-            this.tempAvg = forecast.getTemperature().getAvg();
-            this.pressMin = forecast.getPressure().getMin();
-            this.pressMax = forecast.getPressure().getMax();
-            this.pressAvg = forecast.getPressure().getAvg();
-            this.windMin = forecast.getWind().getSpeed().getMin();
-            this.windMax = forecast.getWind().getSpeed().getMax();
-            this.windAvg = forecast.getWind().getSpeed().getAvg();
-            this.windTitle = forecast.getWind().getDirection().getTitle();
-            this.windVal = forecast.getWind().getDirection().getValue();
-            this.windTitleLetter = forecast.getWind().getDirection().getTitleLetter();
-            this.windTitleShort = forecast.getWind().getDirection().getTitleShort();
-            this.iconPath = forecast.getIconPath();
-            this.iconPath = forecast.getBigIconPath();
-        }
-
-        DetailForecast asDetailForecast() {
-            return new DetailForecast(
-                    DayPeriod.valueOf(dayPeriod),
-                    new Property(tempMin, tempMax, tempAvg),
-                    new Property(pressMin, pressMax, pressAvg),
-                    new Wind(new Property(windMin, windMax, windAvg), new Direction(windTitle, windVal, windTitleLetter, windTitleShort)),
-                    iconPath,
-                    bigIconPath
-            );
-        }
 
         public int getId() {
             return mId;

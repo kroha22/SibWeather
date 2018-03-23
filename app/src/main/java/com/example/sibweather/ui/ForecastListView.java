@@ -1,8 +1,6 @@
 package com.example.sibweather.ui;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +13,6 @@ import com.example.sibweather.utils.Action;
 import com.example.sibweather.utils.Callable;
 
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +79,6 @@ class ForecastListView {
     }
 
     void setForecasts(@NotNull List<DayForecast> forecasts) {
-        final LocalDate today = LocalDate.now();
 
         for (int i = 0; i < daysForecastViews.size(); i++) {
             final DayForecast forecast = forecasts.get(i);
@@ -100,16 +96,6 @@ class ForecastListView {
 
                 forecastMainView.removeAllViews();
                 forecastMainView.addView(view);
-
-                if (today.dayOfMonth().equals(forecast.getDate().dayOfMonth()) && today.monthOfYear().equals(forecast.getDate().monthOfYear())){
-                    final Drawable background = ContextCompat.getDrawable(mainView.getContext(), R.drawable.blue_bubble);
-
-                    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                        mainView.setBackgroundDrawable(background);
-                    } else {
-                        mainView.setBackground(background);
-                    }
-                }
             }
         }
     }

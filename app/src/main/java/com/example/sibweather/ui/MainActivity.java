@@ -101,6 +101,7 @@ public class MainActivity extends MvpAppCompatActivity implements ForecastView {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setMessage(msg)
+                .setCancelable(false)
                 .setPositiveButton("Да", (dialog, which) -> onPositive.execute());
 
         if (onNegative!=null) {

@@ -14,6 +14,7 @@ import com.example.sibweather.model.forecast.Forecast;
 import com.example.sibweather.model.forecast.Hour;
 import com.example.sibweather.model.forecast.WeatherResponse;
 import com.example.sibweather.network.RetrofitService;
+import com.example.sibweather.utils.Action;
 import com.example.sibweather.utils.TimeUtils;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,6 +24,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -72,7 +74,13 @@ public class ForecastPresenter extends MvpPresenter<ForecastView> {
     void start() {
         if (currentState == State.EMPTY) {
             if (city != null) {
-                loadForecasts();
+                getForecasts(() -> {
+                    if ((forecasts.isEmpty())) {
+                        loadForecasts();
+                    } else {
+                        showForecast();
+                    }
+                });
             } else {
                 showSelectDialog();
             }
@@ -96,12 +104,24 @@ public class ForecastPresenter extends MvpPresenter<ForecastView> {
         switch (currentState) {
 
             case DAY_FORECAST:
-                showForecast();
+                showForecast(this::loadForecasts);
                 return true;
 
         }
 
         return false;
+    }
+
+    private void getForecasts(@NotNull Action onComplete) {
+        showLoadProgress();
+
+        subscription = loadForecastsFromDb()
+                .timeout(1, TimeUnit.SECONDS)
+                .retry(2)
+                .subscribeOn(Schedulers.io())
+                .doOnNext(forecasts -> dao.saveForecasts(city, forecasts))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::setForecasts, this::onLoadError, onComplete::execute);
     }
 
     private void loadForecasts() {
@@ -128,6 +148,14 @@ public class ForecastPresenter extends MvpPresenter<ForecastView> {
         setCurrentState(State.SELECT);
     }
 
+    private void showForecast(@NotNull Action onEmpty) {
+        if ((forecasts.isEmpty())) {
+            onEmpty.execute();
+        } else {
+            showForecast();
+        }
+    }
+
     private void showForecast() {
         if ((forecasts.isEmpty())) {
             showReloadMsg(NO_DATA_MESSAGE);
@@ -149,7 +177,7 @@ public class ForecastPresenter extends MvpPresenter<ForecastView> {
 
     private void onSelectCity(@NotNull City city) {
         this.city = city;
-        this.weatherInCityStr = WEATHER_IN_STR + city.getVal()+ (city == City.KEMEROVO ? "" : "е");
+        this.weatherInCityStr = WEATHER_IN_STR + city.getVal() + (city == City.KEMEROVO ? "" : "е");
 
         loadForecasts();
     }
@@ -159,6 +187,12 @@ public class ForecastPresenter extends MvpPresenter<ForecastView> {
         showReloadMsg(LOAD_ERROR_MESSAGE);
     }
 
+    private Observable<List<DayForecast>> loadForecastsFromDb() {
+        return Observable.create(subscriber -> {
+            subscriber.onNext(dao.getForecasts(city));
+            subscriber.onCompleted();
+        });
+    }
 
     private void setForecasts(@NotNull List<DayForecast> forecasts) {
         this.forecasts = forecasts;

@@ -19,10 +19,6 @@ class ImageUtils {
         loadIconInto(view, iconPath, R.dimen.weather_pic_width, R.dimen.weather_pic_height);
     }
 
-    static void loadMiddleIconInto(@NotNull ImageView view, @NotNull String iconPath)  {
-        loadIconInto(view, iconPath, R.dimen.weather_pic_width_middle, R.dimen.weather_pic_height_middle);
-    }
-
     static void loadBigIconInto(@NotNull ImageView view, @NotNull String iconPath)  {
         loadIconInto(view, iconPath, R.dimen.weather_pic_width_big, R.dimen.weather_pic_height_big);
     }
