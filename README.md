@@ -1,1 +1,2 @@
-# NgsWeather
+# SibWeather
+Ngs weather app
